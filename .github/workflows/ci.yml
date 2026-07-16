@@ -8,7 +8,7 @@ jobs:
         run: |
           MSG="${{ github.event.head_commit.message }}"
           echo "commit message: $MSG"
-          if echo "$MSG" | grep -qi '\[fail\]'; then
+          if echo "$MSG" | grep -q 'FAILCI'; then
             echo "::error::intentional CI failure for Wait-for-CI gate test"
             exit 1
           fi
