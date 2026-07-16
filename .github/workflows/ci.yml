@@ -1,0 +1,15 @@
+name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gate on commit message
+        run: |
+          MSG="${{ github.event.head_commit.message }}"
+          echo "commit message: $MSG"
+          if echo "$MSG" | grep -qi '\[fail\]'; then
+            echo "::error::intentional CI failure for Wait-for-CI gate test"
+            exit 1
+          fi
+          echo "CI passing"
