@@ -8,7 +8,5 @@ jobs:
         run: |
           MSG="${{ github.event.head_commit.message }}"
           echo "commit: $MSG"
-          echo "slow CI so awaiting_ci is observable in the UI"
-          sleep 110
           if echo "$MSG" | grep -q 'FAILCI'; then echo "::error::intentional failure"; exit 1; fi
           echo "CI passing"
